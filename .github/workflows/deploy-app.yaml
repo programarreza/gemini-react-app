@@ -2,11 +2,23 @@ name: Ready the code and deploy
 
 on: [push, workflow_dispatch]
 
-jobs: 
+jobs:
   test-code:
     runs-on: ubuntu-latest
     steps:
-      - name: print working directory
-        run: |
-          node -v
-          git --version
+      - name: copying the codes
+        uses: actions/checkout@v4
+
+      - name: install node-js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.16.0
+
+      - name: check node version
+        run: node -v
+
+      - name: install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: run the tests
+        run: yarn test
