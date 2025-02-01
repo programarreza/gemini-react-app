@@ -1,14 +1,34 @@
+# name: Ready the code and deploy
+
+# on: [push, workflow_dispatch]
+
+# jobs:
+#   test-code:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: print working directory
+#         run: |
+#           pwd
+#           ls -a
+#           echo $GITHUB_WORKSPACE
+
 name: Ready the code and deploy
 
-on: [push, workflow_dispatch]
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
 
-jobs: 
+jobs:
   test-code:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
       - name: print working directory
         run: |
           pwd
           ls -a
           echo $GITHUB_WORKSPACE
-
